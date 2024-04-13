@@ -1,0 +1,33 @@
+{
+  "create new header": {
+    "scope": "cpp",
+    "prefix": "create-hpp",
+    "body": [
+      "#pragma once",
+      "",
+      "#include \"pch.h\"",
+      "#include \"Tower/framework.h\"",
+      "",
+      "namespace Tower",
+      "{",
+      "\tclass $TM_FILENAME_BASE ",
+      "\t{",
+      "\tpublic:",
+      "",
+      "\tprivate:",
+      "\t};",
+      "}"
+    ],
+    "description": "Default contents for a Tower header file."
+  },
+  "create new implementation": {
+    "scope": "cpp",
+    "prefix": "create-cpp",
+    "body": [
+      "#include \"pch.h\"",
+      "#include \"Tower/$TM_FILENAME_BASE.hpp\"",
+      "",
+      "using namespace Tower;"
+    ]
+  }
+}
