@@ -122,6 +122,9 @@ void Mesh::_Init(p_Shader shader)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(U32) * _indices.size(), &_indices[0], GL_STATIC_DRAW);
 
+    // TODO: Move all of this into the shader class. This is something the shader should abstract away from the model.
+    // Here is why. Say I want to change the name of position to pos. If I forget to update the model init code, it will fail.
+    // This is not good. This hides a problem. If the shader had all this code, then the model could just say shader->
     // Vertex positions
     U32 location = shader->GetAttributeLocation("position");
     glEnableVertexAttribArray(location);

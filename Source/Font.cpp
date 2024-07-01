@@ -1,10 +1,10 @@
 #include "pch.h"
-#include "Tower/Components/Font.hpp"
+#include "Tower/UI/Font.hpp"
 #include <iostream>
 
 using namespace Tower;
 
-Font::Font(void):
+Font::Font(void) :
     _characters()
 {
 
