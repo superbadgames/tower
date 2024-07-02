@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Tower/framework.h"
-using namespace Tower;
+
 
 namespace Tower_Test
 {
