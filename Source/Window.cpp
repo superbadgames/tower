@@ -50,7 +50,7 @@ bool Window::Init(string gameName, U32 width, U32 height)
     {
         // TODO: Replace with a better logging system.
         // Maybe throw?
-        assert(1 && "The window is fucked man.");
+        assert(1 && "There was a problem creating the main window. glfwCreateWindow failed.");
         glfwTerminate();
         return false;
     }
@@ -121,7 +121,7 @@ bool Window::ShouldWindowClose(void)
 {
     if (!_mainWindow)
     {
-        assert(1 && "ERROR! The window is null actually");
+        assert(1 && "ERROR! The window is null, which means that Init has not yet been called.");
     }
     return glfwWindowShouldClose(_mainWindow);
 }

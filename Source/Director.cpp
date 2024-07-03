@@ -33,7 +33,7 @@ bool Director::Init(WindowType type, string name, const U32 width, const U32 hei
 {
     if (type == WindowType::OPEN_GL)
     {
-        _window = std::make_shared<Window>(Window{});
+        _window = std::make_shared<Window>();
         _window->Init(name, width, height);
     }
 
