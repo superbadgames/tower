@@ -3,7 +3,7 @@
 
 using namespace Tower;
 
-Mesh::Mesh(void):
+Mesh::Mesh(void) :
     _vao(0),
     _vbo(0),
     _ebo(0),
@@ -29,26 +29,22 @@ void Mesh::Load(const std::vector<Vertex>& vertices, const std::vector<U32> indi
 
 void Mesh::MakeSprite(p_Shader shader)
 {
-    Vertex topRight;
-    topRight.position = glm::vec3(1.0f, 1.0f, 0.0f);
-    topRight.uvs = glm::vec2(1.0f, 1.0f);
+    // Top Right
+    _vertexPositions.insert(end(_vertexPositions), { 1.0f, 1.0f });
+    _vertexUvs.insert(end(_vertexUvs), { 1.0f, 1.0f });
 
-    Vertex bottomRight;
-    bottomRight.position = glm::vec3(1.0f, -1.0f, 0.0f);
-    bottomRight.uvs = glm::vec2(1.0f, 0.0f);
+    // Bottom Right
+    _vertexPositions.insert(end(_vertexPositions), { -1.0f, 1.0f });
+    _vertexUvs.insert(end(_vertexUvs), { 1.0f, 0.0f });
 
-    Vertex bottomLeft;
-    bottomLeft.position = glm::vec3(-1.0f, -1.0f, 0.0);
-    bottomLeft.uvs = glm::vec2(0.0f, 0.0f);
+    // Bottom Left
+    _vertexPositions.insert(end(_vertexPositions), { -1.0f, -1.0f });
+    _vertexUvs.insert(end(_vertexUvs), { 0.0f, 0.0f });
 
-    Vertex topLeft;
-    topLeft.position = glm::vec3(-1.0f, 1.0f, 0.0f);
-    topLeft.uvs = glm::vec2(0.0f, 1.0f);
+    // Top Left
+    _vertexPositions.insert(end(_vertexPositions), { 1.0f, -1.0f });
+    _vertexUvs.insert(end(_vertexUvs), { 0.0f, 1.0f });
 
-    _vertices.push_back(topRight);
-    _vertices.push_back(bottomRight);
-    _vertices.push_back(bottomLeft);
-    _vertices.push_back(topLeft);
 
     _indices = std::vector<U32>(
         {
@@ -116,7 +112,7 @@ void Mesh::_Init(p_Shader shader)
     glBindVertexArray(_vao);
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * _vertices.size(), &_vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(F32) * _vertices.size(), &_vertices[0], GL_STATIC_DRAW);
 
     // Draw Indices
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
@@ -128,12 +124,12 @@ void Mesh::_Init(p_Shader shader)
     // Vertex positions
     U32 location = shader->GetAttributeLocation("position");
     glEnableVertexAttribArray(location);
-    glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)0);
+    glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, sizeof(F32), (void*)0);
 
     // Vertex uvs
     location = shader->GetAttributeLocation("uvs");
     glEnableVertexAttribArray(location);
-    glVertexAttribPointer(location, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, uvs));
+    glVertexAttribPointer(location, 2, GL_FLOAT, GL_FALSE, sizeof(U32), (void*)0);
 
 
     glBindVertexArray(0);

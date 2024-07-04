@@ -39,6 +39,9 @@ namespace Tower
         GLuint _vbo;    // Vertex Buffer Object
         GLuint _ebo;    // Element Buffer Object
         std::vector<Vertex> _vertices;
+        std::vector<F32> _vertexPositions;
+        std::vector<F32> _vertexNormals;
+        std::vector<F32> _vertexUvs;
         std::vector<U32> _indices;
         // TODO: This needs to change to an array of textures.
         // Also, materials need to be added.
