@@ -14,7 +14,6 @@ namespace Tower
         glm::vec3 position{ 0.0f };
         glm::vec3 rotationAxis{ 1.0f };
         glm::vec3 scale{ 1.0f };
-        glm::vec4 color{ 0.0f };
         real rotationAngle{ 0 };
 
         inline const glm::mat4& GetTransform(void)

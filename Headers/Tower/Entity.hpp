@@ -7,6 +7,7 @@
 #include "Tower/Rendering/Model.hpp"
 #include "Tower/Rendering/Mesh.hpp"
 #include "Tower/Rendering/Shader.hpp"
+#include "Tower/Components/Color.hpp"
 
 namespace Tower
 {
@@ -57,17 +58,20 @@ namespace Tower
 
         void SetPosition(const glm::vec3& position);
 
-        void SetColor(const glm::vec4& color);
-
         const glm::mat4& GetTransform(void) const;
 
         p_Model GetModel(void) const;
+
+        inline const Color& GetColor(void) const { return _color; }
+
+        inline void SetColor(Color color) { _color = color; }
 
 
     private:
         p_Transform _transform;
         p_Model _model;
         p_Shader _shader;
+        Color _color;
     };
     typedef shared_ptr<Entity> p_Entity;
 }

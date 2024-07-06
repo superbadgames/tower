@@ -6,8 +6,10 @@ using namespace Tower;
 Entity::Entity(void) :
     _transform(nullptr),
     _model(nullptr),
-    _shader(nullptr)
+    _shader(nullptr),
+    _color()
 {
+
 }
 
 Entity::~Entity(void)
@@ -27,7 +29,7 @@ void Entity::Draw(const glm::mat4& viewMatrix) const
         // that is about the draw tho. The uniforms have to be set up. This will do
         // that for now.
         _shader->SetUniform("view", viewMatrix);
-        _shader->SetUniform("object_color", _transform->color);
+        _shader->SetUniform("object_color", glm::vec4(_color.red, _color.green, _color.blue, _color.alpha));
         _shader->SetUniform("model", _transform->GetTransform());
 
         _model->Draw();
@@ -36,16 +38,13 @@ void Entity::Draw(const glm::mat4& viewMatrix) const
 
 void Entity::Update(F32 delta)
 {
-    // TODO: this should be abstracted out to an UpdateSystem
-    //_shader->SetUniform("model", _transform->GetTransform());
+
 
 }
 
 void Entity::AddTransform(void)
 {
     _transform = std::make_shared<Transform>();
-    // Default color for now
-    _transform->color = glm::vec4(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 void Entity::AddModel(void)
@@ -134,11 +133,6 @@ void Entity::SetScale(const glm::vec3& scale)
 void Entity::SetPosition(const glm::vec3& position)
 {
     _transform->position = position;
-}
-
-void Entity::SetColor(const glm::vec4& color)
-{
-    _transform->color = color;
 }
 
 const glm::mat4& Entity::GetTransform(void) const
