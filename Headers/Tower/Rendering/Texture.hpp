@@ -17,7 +17,7 @@ namespace Tower
 
         void Bind(U32 texUnit = 0);
 
-        void Unbind(U32 texUnit = 0);
+        void Unbind(void);
 
     private:
         GLuint _textureID;

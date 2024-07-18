@@ -8,7 +8,7 @@
 
 using namespace Tower;
 
-Texture::Texture(void):
+Texture::Texture(void) :
     _textureID(0),
     _type(),
     _width(0),
@@ -60,7 +60,7 @@ void Texture::Bind(U32 texUnit)
     glBindTexture(GL_TEXTURE_2D, _textureID);
 }
 
-void Texture::Unbind(U32 texUnit)
+void Texture::Unbind(void)
 {
     glActiveTexture(0);
     glBindTexture(GL_TEXTURE_2D, 0);

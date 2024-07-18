@@ -6,6 +6,7 @@
 //#include "Tower/Rendering/Texture.hpp"
 #include "Tower/Rendering/Model.hpp"
 #include "Tower/Rendering/Mesh.hpp"
+#include "Tower/Rendering/Sprite.hpp"
 #include "Tower/Rendering/Shader.hpp"
 #include "Tower/Components/Color.hpp"
 
@@ -70,6 +71,7 @@ namespace Tower
     private:
         p_Transform _transform;
         p_Model _model;
+        p_Sprite _sprite;
         p_Shader _shader;
         Color _color;
     };

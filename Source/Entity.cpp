@@ -6,6 +6,7 @@ using namespace Tower;
 Entity::Entity(void) :
     _transform(nullptr),
     _model(nullptr),
+    _sprite(nullptr),
     _shader(nullptr),
     _color()
 {
@@ -21,19 +22,10 @@ Entity::~Entity(void)
 
 void Entity::Draw(const glm::mat4& viewMatrix) const
 {
-    if (_model != nullptr)
-    {
-        // TODO: this could be a problem. Maybe this should be decided by something else,
-        // like maybe the sprite, or the model, or maybe even later. I'm not sure.
-        // There has to be some stage where the shader is configured for the model
-        // that is about the draw tho. The uniforms have to be set up. This will do
-        // that for now.
-        _shader->SetUniform("view", viewMatrix);
-        _shader->SetUniform("object_color", glm::vec4(_color.red, _color.green, _color.blue, _color.alpha));
-        _shader->SetUniform("model", _transform->GetTransform());
-
-        _model->Draw();
-    }
+    std::cout << "Entity::Draw is called...\n";
+    //_shader->Use();
+    _sprite->Draw();
+    //    _shader->StopUse();
 }
 
 void Entity::Update(F32 delta)
@@ -63,8 +55,8 @@ void Entity::AddModel(const string& filePath)
 void Entity::AddSprite(p_Shader shader, p_Texture texture)
 {
     _shader = shader;
-    _model = std::make_shared<Model>();
-    _model->CreateSprite(_shader, texture);
+    _sprite = std::make_shared<Sprite>();
+    _sprite->Init();
 }
 
 void Entity::AddShader(void)

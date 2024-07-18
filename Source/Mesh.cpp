@@ -53,7 +53,7 @@ void Mesh::MakeSprite(p_Shader shader)
         }
     );
 
-    _Init(shader);
+    _InitSprite(shader);
 }
 
 void Mesh::Draw(p_Shader shader)
@@ -125,6 +125,38 @@ void Mesh::_Init(p_Shader shader)
     U32 location = shader->GetAttributeLocation("position");
     glEnableVertexAttribArray(location);
     glVertexAttribPointer(location, 3, GL_FLOAT, GL_FALSE, sizeof(F32), (void*)0);
+
+    // Vertex uvs
+    location = shader->GetAttributeLocation("uvs");
+    glEnableVertexAttribArray(location);
+    glVertexAttribPointer(location, 2, GL_FLOAT, GL_FALSE, sizeof(U32), (void*)0);
+
+
+    glBindVertexArray(0);
+}
+
+void Mesh::_InitSprite(p_Shader shader)
+{
+    glGenVertexArrays(1, &_vao);
+    glGenBuffers(1, &_vbo);
+    glGenBuffers(1, &_ebo);
+
+    glBindVertexArray(_vao);
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(F32) * _vertices.size(), &_vertexPositions[0], GL_STATIC_DRAW);
+
+    // Draw Indices
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(U32) * _indices.size(), &_indices[0], GL_STATIC_DRAW);
+
+    // TODO: Move all of this into the shader class. This is something the shader should abstract away from the model.
+    // Here is why. Say I want to change the name of position to pos. If I forget to update the model init code, it will fail.
+    // This is not good. This hides a problem. If the shader had all this code, then the model could just say shader->
+    // Vertex positions
+    U32 location = shader->GetAttributeLocation("position");
+    glEnableVertexAttribArray(location);
+    glVertexAttribPointer(location, 2, GL_FLOAT, GL_FALSE, sizeof(F32), (void*)0);
 
     // Vertex uvs
     location = shader->GetAttributeLocation("uvs");

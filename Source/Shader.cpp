@@ -3,7 +3,7 @@
 
 using namespace Tower;
 
-Shader::Shader(void):
+Shader::Shader(void) :
     _shaderHandle(0),
     _attributeLocations{},
     _uniforms{} {};

@@ -48,6 +48,8 @@ namespace Tower
         p_Texture _texture;
 
         void _Init(p_Shader shader);
+
+        void _InitSprite(p_Shader shader);
     };
     typedef shared_ptr<Mesh> p_Mesh;
 }

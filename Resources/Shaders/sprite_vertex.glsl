@@ -1,16 +1,9 @@
 #version 330 core
 
-layout (location=0) in vec2 position;
-layout (location=1) in vec2 uvs;
+layout (location=0) in vec3 position;
 
-uniform mat4 model;
-uniform mat4 view;
-
-out vec2 vertex_uvs;
 
 void main()
 {
-    gl_Position = view * model * vec4(position, 0.0, 1.0);
-
-    vertex_uvs = uvs;
+    gl_Position = vec4(position.x, position.y, position.z, 1.0);
 }

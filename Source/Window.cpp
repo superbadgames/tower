@@ -84,12 +84,11 @@ void Window::Cleanup(void)
 
 void Window::ProcessEvents(void)
 {
+    // Needs refactoring to work
     //_inputController->ResetAllBindingStates();
+    glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapBuffers(_mainWindow);
-
     glfwPollEvents();
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 
