@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
+#include <vector>
 
 namespace Tower
 {
@@ -18,7 +19,7 @@ namespace Tower
     private:
         U32 _vao;
         U32 _vbo;
-        F32 _vertices[9];
+        std::vector<F32> _vertices;
     };
     typedef shared_ptr<Sprite> p_Sprite;
 }

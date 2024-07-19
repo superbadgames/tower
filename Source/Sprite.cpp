@@ -21,17 +21,17 @@ Sprite::~Sprite(void)
 
 void Sprite::Init(void)
 {
-    _vertices[0] = -0.5f;
-    _vertices[1] = -0.5f;
-    _vertices[2] = 0.0f;
+    _vertices.push_back(-0.5f);
+    _vertices.push_back(-0.5f);
+    _vertices.push_back(0.0f);
 
-    _vertices[3] = 0.5f;
-    _vertices[4] = -0.5f;
-    _vertices[5] = 0.0f;
+    _vertices.push_back(0.5f);
+    _vertices.push_back(-0.5f);
+    _vertices.push_back(0.0f);
 
-    _vertices[6] = 0.0f;
-    _vertices[7] = 0.5f;
-    _vertices[8] = 0.0f;
+    _vertices.push_back(0.0f);
+    _vertices.push_back(0.5f);
+    _vertices.push_back(0.0f);
 
 
     glGenVertexArrays(1, &_vao);
@@ -40,7 +40,7 @@ void Sprite::Init(void)
     glBindVertexArray(_vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(_vertices), _vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(F32) * _vertices.size(), &_vertices[0], GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(F32), (void*)0);
     glEnableVertexAttribArray(0);
@@ -51,7 +51,6 @@ void Sprite::Init(void)
 
 void Sprite::Draw(void)
 {
-    std::cout << "Sprite::Draw is called...\n";
     glBindVertexArray(_vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }

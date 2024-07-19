@@ -22,7 +22,6 @@ Entity::~Entity(void)
 
 void Entity::Draw(const glm::mat4& viewMatrix) const
 {
-    std::cout << "Entity::Draw is called...\n";
     //_shader->Use();
     _sprite->Draw();
     //    _shader->StopUse();

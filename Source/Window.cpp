@@ -24,10 +24,10 @@ Window::~Window(void)
 
 bool Window::Init(string gameName, U32 width, U32 height)
 {
-    glfwSetWindowUserPointer(_mainWindow, (void*)this);
-    glfwSetKeyCallback(_mainWindow, &_KeyboardInputHandler);
-    glfwSetMouseButtonCallback(_mainWindow, &_MouseButtonHandler);
-    glfwSetCursorPosCallback(_mainWindow, &_MouseCursorHandler);
+    // glfwSetWindowUserPointer(_mainWindow, (void*)this);
+    // glfwSetKeyCallback(_mainWindow, &_KeyboardInputHandler);
+    // glfwSetMouseButtonCallback(_mainWindow, &_MouseButtonHandler);
+    // glfwSetCursorPosCallback(_mainWindow, &_MouseCursorHandler);
 
     // Initialize GLFW
     if (!glfwInit())
@@ -68,7 +68,7 @@ bool Window::Init(string gameName, U32 width, U32 height)
 
     glViewport(0, 0, _bufferWidth, _bufferHeight);
 
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -86,9 +86,9 @@ void Window::ProcessEvents(void)
 {
     // Needs refactoring to work
     //_inputController->ResetAllBindingStates();
-    glClear(GL_COLOR_BUFFER_BIT);
     glfwSwapBuffers(_mainWindow);
     glfwPollEvents();
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 

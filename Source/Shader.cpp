@@ -19,7 +19,7 @@ void Shader::Load(const string& vertexFilepath, const string& fragmentFilepath)
 
     if (!_shaderHandle)
     {
-        assert("The shader program is fucked.");
+        assert("Error! Unable to create the shader handle. This is a big problem with openGL.\n");
     }
 
     GLuint vertexShaderHandle = _CompileShader(vertexFilepath, GL_VERTEX_SHADER);
