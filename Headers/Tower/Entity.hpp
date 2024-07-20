@@ -8,7 +8,7 @@
 #include "Tower/Rendering/Mesh.hpp"
 #include "Tower/Rendering/Sprite.hpp"
 #include "Tower/Rendering/Shader.hpp"
-#include "Tower/Components/Color.hpp"
+#include "Tower/Rendering/Color.hpp"
 
 namespace Tower
 {
@@ -65,7 +65,7 @@ namespace Tower
 
         inline const Color& GetColor(void) const { return _color; }
 
-        inline void SetColor(Color color) { _color = color; }
+        void SetColor(const Color& color);
 
 
     private:

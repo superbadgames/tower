@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
+#include "Tower/Rendering/Texture.hpp"
 #include <vector>
 
 namespace Tower
@@ -13,9 +14,12 @@ namespace Tower
 
         ~Sprite(void);
 
-        void Init(void);
+        void Init(p_Texture texture);
 
         void Draw(void);
+
+        inline void SetTexture(p_Texture texture) { _texture = texture; }
+
     private:
         // This shouldn't be shared. The vbo data could be different
         U32 _vao;
@@ -23,7 +27,9 @@ namespace Tower
         U32 _ebo;
         // Can this be static? Could all sprites share their vertices?
         std::vector<F32> _vertices;
+        std::vector<F32> _uvs;
         std::vector<U32> _indices;
+        p_Texture _texture;
     };
     typedef shared_ptr<Sprite> p_Sprite;
 }

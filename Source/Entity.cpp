@@ -55,7 +55,7 @@ void Entity::AddSprite(p_Shader shader, p_Texture texture)
 {
     _shader = shader;
     _sprite = std::make_shared<Sprite>();
-    _sprite->Init();
+    _sprite->Init(texture);
 }
 
 void Entity::AddShader(void)
@@ -140,3 +140,12 @@ p_Model Entity::GetModel(void) const
     return nullptr;
 }
 
+void Entity::SetColor(const Color& color)
+{
+    _color = color;
+
+    glm::vec4 colorVec = { _color.red, _color.green, _color.blue, 1.0f };
+
+    // Hard coded for now. I need a better way to handle this
+    _shader->SetUniform("sprite_color", colorVec);
+}
