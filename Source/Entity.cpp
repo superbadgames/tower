@@ -22,9 +22,9 @@ Entity::~Entity(void)
 
 void Entity::Draw(const glm::mat4& viewMatrix) const
 {
-    //_shader->Use();
+    _shader->Use();
     _sprite->Draw();
-    //    _shader->StopUse();
+    _shader->StopUse();
 }
 
 void Entity::Update(F32 delta)
