@@ -39,7 +39,7 @@ void Sprite::Init(p_Texture texture)
         1.0f, 0.0f,
         // Bottom Left
         0.0f, 0.0f,
-        // Top Right
+        // Top Left
         0.0f, 1.0f
         });
 
