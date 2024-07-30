@@ -3,21 +3,21 @@
 using namespace Tower;
 
 RigidBody3D::RigidBody3D(void)
-    :
-    _active(true),
-    _isAwake(false),
-    _inverseMass(1.0f),
-    _linearDamping(0.999f),
-    _angularDamping(0.999f),
-    _obj(nullptr),
-    _inverseInertiaTensor(0.0f),
-    _inverseInertiaTensorInWorld(0.0f),
-    _velocity(0.0f),
-    _acceleration(0.0f),
-    _rotation(0.0f),
-    _forceAccum(0.0f),
-    _torqueAccum(0.0f)
-{  }
+    : _active(true),
+      _isAwake(false),
+      _inverseMass(1.0f),
+      _linearDamping(0.999f),
+      _angularDamping(0.999f),
+      _obj(nullptr),
+      _inverseInertiaTensor(0.0f),
+      _inverseInertiaTensorInWorld(0.0f),
+      _velocity(0.0f),
+      _acceleration(0.0f),
+      _rotation(0.0f),
+      _forceAccum(0.0f),
+      _torqueAccum(0.0f)
+{
+}
 
 RigidBody3D::~RigidBody3D(void)
 {
@@ -26,49 +26,47 @@ RigidBody3D::~RigidBody3D(void)
 
 void RigidBody3D::Integrate(void)
 {
-    if (_obj == nullptr)
-    {
-        assert("RigidBody3D::Integrate: object not set!");
-    }
+    // if (_obj == nullptr)
+    // {
+    //     assert("RigidBody3D::Integrate: object not set!");
+    // }
 
-    if (_inverseMass == 0) return;
+    // if (_inverseMass == 0) return;
 
-    // TODO: Pass delta in
-    //F32 delta = TM::Timer::Instance()->DeltaTime();
-    // locked around 30 pfs
-    F32 delta = 0.033f;
+    // // TODO: Pass delta in
+    // //F32 delta = TM::Timer::Instance()->DeltaTime();
+    // // locked around 30 pfs
+    // F32 delta = 0.033f;
 
-    assert(delta > 0.0f);
+    // assert(delta > 0.0f);
 
-    glm::vec3 position = _obj->GetPosition();
+    // glm::vec3 position = _obj->GetPosition();
 
-    position += _velocity * delta;
+    // position += _velocity * delta;
 
-    _obj->SetPosition(position);
+    // _obj->SetPosition(position);
 
-    // TODO: Look at the book. This feels wrong.
-    //_obj->SetRotationAngle(_rotation * delta);
+    // // TODO: Look at the book. This feels wrong.
+    // //_obj->SetRotationAngle(_rotation * delta);
 
-    glm::vec3 resultingAcc = _acceleration;
+    // glm::vec3 resultingAcc = _acceleration;
 
-    //Optional hard coded gravity should be added here
+    // //Optional hard coded gravity should be added here
 
-    resultingAcc += _forceAccum * delta;
+    // resultingAcc += _forceAccum * delta;
 
-    _velocity += resultingAcc * delta;
-    _velocity *= real_pow(_linearDamping, delta);
+    // _velocity += resultingAcc * delta;
+    // _velocity *= real_pow(_linearDamping, delta);
 
+    // // TODO:: Something is wrong here. Check in the book
+    // //glm::vec3 angularAcc = _inverseInertiaTensorInWorld * _torqueAccum;
 
-    // TODO:: Something is wrong here. Check in the book
-    //glm::vec3 angularAcc = _inverseInertiaTensorInWorld * _torqueAccum;
+    // // TODO:: same
+    // //_rotation = angularAcc * delta;
+    // //_rotation *= real_pow(_angularDamping, delta);
 
-    // TODO:: same
-    //_rotation = angularAcc * delta;
-    //_rotation *= real_pow(_angularDamping, delta);
-
-
-    CalculateDerivedData();
-    ClearAccumulators();
+    // CalculateDerivedData();
+    // ClearAccumulators();
 }
 
 void RigidBody3D::CalculateDerivedData(void)
@@ -89,89 +87,87 @@ bool RigidBody3D::GetActive(void) const
 {
     if (_obj != nullptr)
     {
-        //return _obj->GetActiveUpdate() && _active;
+        // return _obj->GetActiveUpdate() && _active;
         return _active;
     }
 
     return _active;
 }
 
-const glm::mat4& RigidBody3D::GetInverseInertiaTensor(void) const
+const glm::mat4 &RigidBody3D::GetInverseInertiaTensor(void) const
 {
     return _inverseInertiaTensor;
 }
 
-void RigidBody3D::SetInverseInertiaTensor(const glm::mat4& mat)
+void RigidBody3D::SetInverseInertiaTensor(const glm::mat4 &mat)
 {
     _inverseInertiaTensor = glm::inverse(mat);
 }
 
-const glm::vec3& RigidBody3D::GetVelocity(void) const
+const glm::vec3 &RigidBody3D::GetVelocity(void) const
 {
     return _velocity;
 }
 
-void RigidBody3D::SetVelocity(const glm::vec4& vec)
+void RigidBody3D::SetVelocity(const glm::vec4 &vec)
 {
     _velocity = vec;
 }
 
-
-void RigidBody3D::AddScaledVelocity(const glm::vec4& vec, F32 scale)
+void RigidBody3D::AddScaledVelocity(const glm::vec4 &vec, F32 scale)
 {
     // This causes an error
     // _velocity += vec * scale;
 }
 
-const glm::vec3& RigidBody3D::GetAcceleration(void) const
+const glm::vec3 &RigidBody3D::GetAcceleration(void) const
 {
     return _acceleration;
 }
 
-void RigidBody3D::SetAcceleration(const glm::vec4& vec)
+void RigidBody3D::SetAcceleration(const glm::vec4 &vec)
 {
     _acceleration = vec;
 }
 
-void RigidBody3D::AddScaledAcceleration(const glm::vec4& vec, F32 scale)
+void RigidBody3D::AddScaledAcceleration(const glm::vec4 &vec, F32 scale)
 {
     // This causes an error
     //_acceleration += vec * scale;
 }
 
-const glm::vec3& RigidBody3D::GetRotation(void) const
+const glm::vec3 &RigidBody3D::GetRotation(void) const
 {
     return _rotation;
 }
 
-void RigidBody3D::SetRotation(const glm::vec3& vec)
+void RigidBody3D::SetRotation(const glm::vec3 &vec)
 {
     _rotation = vec;
 }
 
-
-void RigidBody3D::AddScaledRotation(const glm::vec3& vec, F32 scale)
+void RigidBody3D::AddScaledRotation(const glm::vec3 &vec, F32 scale)
 {
     _rotation += vec * scale;
 }
 
-const glm::vec3& RigidBody3D::GetForces(void) const
+const glm::vec3 &RigidBody3D::GetForces(void) const
 {
     return _forceAccum;
 }
 
-void RigidBody3D::AddForce(const glm::vec3& force)
+void RigidBody3D::AddForce(const glm::vec3 &force)
 {
     _forceAccum += force;
     _isAwake = true;
 }
 
-const glm::vec3& RigidBody3D::GetTorque(void) const
+const glm::vec3 &RigidBody3D::GetTorque(void) const
 {
     return _torqueAccum;
 }
 
-void RigidBody3D::AddTorque(const glm::vec3& torque)
+void RigidBody3D::AddTorque(const glm::vec3 &torque)
 {
     _torqueAccum += torque;
 }
@@ -182,20 +178,20 @@ void RigidBody3D::ClearAccumulators(void)
     _torqueAccum = glm::vec3(0.0f);
 }
 
-void RigidBody3D::AddForceAtPoint(const glm::vec3& force, const glm::vec3& point)
+void RigidBody3D::AddForceAtPoint(const glm::vec3 &force, const glm::vec3 &point)
 {
-    if (_obj == nullptr)
-    {
-        assert("RigidBody3D::AddForceAtPoint: object not set!");
-    }
+    // if (_obj == nullptr)
+    // {
+    //     assert("RigidBody3D::AddForceAtPoint: object not set!");
+    // }
 
-    glm::vec3 pt{};
-    pt -= _obj->GetPosition();
+    // glm::vec3 pt{};
+    // pt -= _obj->GetPosition();
 
-    _forceAccum += force;
-    _torqueAccum += glm::cross(pt, force);
+    // _forceAccum += force;
+    // _torqueAccum += glm::cross(pt, force);
 
-    _isAwake = true;
+    // _isAwake = true;
 }
 
 real RigidBody3D::GetInverseMass(void) const
@@ -263,11 +259,12 @@ void RigidBody3D::SetEntity(p_Entity obj)
 
 const glm::vec3 RigidBody3D::GetPosition(void)
 {
-    if (_obj == nullptr)
-    {
-        assert("RigidBody3D::GetPosition error! No Entity is set!");
-    }
-    return _obj->GetPosition();
+    // if (_obj == nullptr)
+    // {
+    //     assert("RigidBody3D::GetPosition error! No Entity is set!");
+    // }
+    // return _obj->GetPosition();
+    return glm::vec3(1.0f);
 }
 
 /*
@@ -281,5 +278,4 @@ const glm::vec3 RigidBody3D::GetPosition(void)
 */
 void RigidBody3D::_TransformInertiaTensor(void)
 {
-
 }
