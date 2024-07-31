@@ -79,9 +79,9 @@ void Sprite::Init(p_Texture texture)
 
 void Sprite::Draw(void)
 {
-    _texture->Bind();
+    //_texture->Bind();
     glBindVertexArray(_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    _texture->Unbind();
+    //_texture->Unbind();
 }
 

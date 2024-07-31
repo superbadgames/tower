@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
+#include <glm/vec4.hpp>
 
 namespace Tower
 {
@@ -16,5 +17,7 @@ namespace Tower
         Color(F32 r, F32 g, F32 b) : red(r), green(g), blue(b) { }
 
         Color(const Color& color) : red(color.red), green(color.green), blue(color.blue) { }
+
+        glm::vec4 ToVec4(void) const { return glm::vec4(red, green, blue, 1.0f); }
     };
 }

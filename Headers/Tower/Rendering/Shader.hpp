@@ -59,6 +59,8 @@ namespace Tower
 
         void SetUniform(string name, const glm::mat4& value);
 
+        inline GLuint GetShaderHandle(void) const { return _shaderHandle; }
+
     private:
         GLuint _shaderHandle;
         std::map<string, U32> _attributeLocations;

@@ -1,29 +1,23 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Debug",
-            "type": "shell",
-            "command": "msbuild",
-            "args": [
-                "Tower.vcxproj ",
-                "/p:configuration=debug"
-            ],
-            "group": "build",
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Release",
-            "type": "shell",
-            "command": "msbuild",
-            "args": [
-                "Tower.vcxproj ",
-                "/p:configuration=release"
-            ],
-            "group": "build",
-            "problemMatcher": "$msCompile"
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Debug",
+      "type": "shell",
+      "command": "msbuild",
+      "args": ["Tower.vcxproj ", "/p:configuration=debug"],
+      "group": "build",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Release",
+      "type": "shell",
+      "command": "msbuild",
+      "args": ["Tower.vcxproj ", "/p:configuration=release"],
+      "group": "build",
+      "problemMatcher": "$msCompile"
+    }
+  ]
 }

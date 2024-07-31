@@ -3,6 +3,16 @@
 
 using namespace Tower;
 
+Transform::Transform(void)
+{
+
+}
+
+Transform::~Transform(void)
+{
+
+}
+
 glm::mat4 Transform::ToMatrix(void) const
 {
     glm::mat4 result = glm::mat4(1.0);

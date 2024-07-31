@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "Tower/framework.h"
 #include "Tower/Rendering/Texture.hpp"
+#include "Tower/Rendering/Color.hpp"
 #include <vector>
 
 namespace Tower
@@ -30,6 +31,7 @@ namespace Tower
         std::vector<F32> _uvs;
         std::vector<U32> _indices;
         p_Texture _texture;
+
     };
     typedef shared_ptr<Sprite> p_Sprite;
 }

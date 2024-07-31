@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "Tower/Rendering/Uniform.hpp"
+#include <iostream>
+
 
 using namespace Tower;
 
@@ -20,6 +22,7 @@ void Uniform::Set(U32 slot, const glm::vec2& value)
 
 void Uniform::Set(U32 slot, const glm::vec3& value)
 {
+    std::cout << "Attempting to set slot " << slot << " to the values " << value.x << ", " << value.y << ", " << value.z << std::endl;
     glUniform3f(slot, value.x, value.y, value.z);
 }
 
