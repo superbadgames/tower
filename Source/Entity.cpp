@@ -7,7 +7,7 @@ Entity::Entity(void) : _transform(nullptr),
 _model(nullptr),
 _sprite(nullptr),
 _shader(nullptr),
-_color()
+_color(0.5f, 0.5f, 0.5f)
 {
 }
 
@@ -20,13 +20,13 @@ Entity::~Entity(void)
 
 void Entity::Draw(const glm::mat4& viewMatrix) const
 {
-    glm::vec4 color = glm::vec4(0.5, 0.0f, 0.5f, 1.0f);
-    _shader->SetUniform("myColor", color);
-    _shader->SetUniform("testing_uniform", glm::vec3(1.0f, 1.0f, 1.0f));
-
-    // Shader Use is called way too often I think.
     _shader->Use();
-    _sprite->Draw();
+
+    if (_sprite != nullptr)
+    {
+        _sprite->Draw(_shader, _color);
+    }
+
     _shader->StopUse();
 }
 

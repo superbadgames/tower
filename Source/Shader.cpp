@@ -99,7 +99,6 @@ void Shader::SetUniform(string name, const S32& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const F32& value)
@@ -107,7 +106,6 @@ void Shader::SetUniform(string name, const F32& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::vec2& value)
@@ -115,7 +113,6 @@ void Shader::SetUniform(string name, const glm::vec2& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::vec3& value)
@@ -124,7 +121,6 @@ void Shader::SetUniform(string name, const glm::vec3& value)
     _CheckForUniform(name);
     std::cout << "Found location " << _uniforms[name] << std::endl;
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::vec4& value)
@@ -132,7 +128,6 @@ void Shader::SetUniform(string name, const glm::vec4& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::ivec2& value)
@@ -140,7 +135,6 @@ void Shader::SetUniform(string name, const glm::ivec2& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::ivec4& value)
@@ -148,7 +142,6 @@ void Shader::SetUniform(string name, const glm::ivec4& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::quat& value)
@@ -156,7 +149,6 @@ void Shader::SetUniform(string name, const glm::quat& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 void Shader::SetUniform(string name, const glm::mat4& value)
@@ -164,7 +156,6 @@ void Shader::SetUniform(string name, const glm::mat4& value)
     Use();
     _CheckForUniform(name);
     Uniform::Set(_uniforms[name], value);
-    StopUse();
 }
 
 // TODO: Maybe this should throw. That way it could be wrapped in a try/catch.
