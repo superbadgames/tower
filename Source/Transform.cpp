@@ -3,7 +3,10 @@
 
 using namespace Tower;
 
-Transform::Transform(void)
+Transform::Transform(void) :
+    _position(0.0f),
+    _scale(1.0f),
+    _rotation()
 {
 
 }
@@ -22,4 +25,10 @@ glm::mat4 Transform::ToMatrix(void) const
     result = glm::scale(result, _scale);
 
     return result;
+}
+
+void Transform::SetRotation(F32 angle, const glm::vec3& axis)
+{
+    _rotation.angle = angle;
+    _rotation.axis = axis;
 }

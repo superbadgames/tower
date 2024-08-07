@@ -3,17 +3,17 @@
 
 using namespace Tower;
 
-Entity::Entity(void) : _transform(nullptr),
-_model(nullptr),
-_sprite(nullptr),
-_shader(nullptr),
-_color(0.5f, 0.5f, 0.5f)
+Entity::Entity(void) :
+    _model(nullptr),
+    _sprite(nullptr),
+    _shader(nullptr),
+    _transform(),
+    _color(0.0f, 0.0f, 0.0f)
 {
 }
 
 Entity::~Entity(void)
 {
-    _transform.reset();
     _model.reset();
     _shader.reset();
 }
@@ -24,6 +24,7 @@ void Entity::Draw(const glm::mat4& viewMatrix) const
 
     if (_sprite != nullptr)
     {
+        _shader->SetUniform("transform", _transform.ToMatrix());
         _sprite->Draw(_shader, _color);
     }
 
@@ -32,11 +33,6 @@ void Entity::Draw(const glm::mat4& viewMatrix) const
 
 void Entity::Update(F32 delta)
 {
-}
-
-void Entity::AddTransform(void)
-{
-    _transform = std::make_shared<Transform>();
 }
 
 void Entity::AddModel(void)
@@ -83,30 +79,35 @@ void Entity::SetColor(const Color& color)
 
 const glm::vec3& Entity::GetPosition(void) const
 {
-    return _transform->GetPosition();
+    return _transform.GetPosition();
 }
 
 void Entity::SetPosition(const glm::vec3& position)
 {
-    _transform->SetPosition(position);
+    _transform.SetPosition(position);
 }
 
 const glm::vec3& Entity::GetScale(void) const
 {
-    return _transform->GetScale();
+    return _transform.GetScale();
 }
 
 void Entity::SetScale(const glm::vec3& scale)
 {
-    _transform->SetScale(scale);
+    _transform.SetScale(scale);
 }
 
 const AxisAngle& Entity::GetRotation(void) const
 {
-    return _transform->GetRotation();
+    return _transform.GetRotation();
 }
 
 void Entity::SetRotation(const AxisAngle& rotation)
 {
-    _transform->SetRotation(rotation);
+    _transform.SetRotation(rotation);
+}
+
+void Entity::SetRotation(F32 angle, const glm::vec3& axis)
+{
+    _transform.SetRotation(angle, axis);
 }

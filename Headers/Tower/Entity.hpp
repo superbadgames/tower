@@ -20,15 +20,13 @@ namespace Tower
 
         ~Entity(void);
 
-        void Draw(const glm::mat4 &viewMatrix) const;
+        void Draw(const glm::mat4& viewMatrix) const;
 
         void Update(F32 delta);
 
-        void AddTransform(void);
-
         void AddModel(void);
 
-        void AddModel(const string &filePath);
+        void AddModel(const string& filePath);
 
         void AddSprite(p_Shader shader, p_Texture texture);
 
@@ -36,31 +34,33 @@ namespace Tower
 
         void AddShader(p_Shader shader);
 
-        void AddTexture(const string &filepath);
+        void AddTexture(const string& filepath);
 
         inline void AddTexture(p_Texture texture) { _model->SetTexture(texture); }
 
-        inline const Color &GetColor(void) const { return _color; }
+        inline const Color& GetColor(void) const { return _color; }
 
-        void SetColor(const Color &color);
+        void SetColor(const Color& color);
 
-        const glm::vec3 &GetPosition(void) const;
+        const glm::vec3& GetPosition(void) const;
 
-        void SetPosition(const glm::vec3 &position);
+        void SetPosition(const glm::vec3& position);
 
-        const glm::vec3 &GetScale(void) const;
+        const glm::vec3& GetScale(void) const;
 
-        void SetScale(const glm::vec3 &scale);
+        void SetScale(const glm::vec3& scale);
 
-        const AxisAngle &GetRotation(void) const;
+        const AxisAngle& GetRotation(void) const;
 
-        void SetRotation(const AxisAngle &rotation);
+        void SetRotation(const AxisAngle& rotation);
+
+        void SetRotation(F32 angle, const glm::vec3& axis);
 
     private:
-        p_Transform _transform;
         p_Model _model;
         p_Sprite _sprite;
         p_Shader _shader;
+        Transform _transform;
         Color _color;
     };
     typedef shared_ptr<Entity> p_Entity;

@@ -24,13 +24,13 @@ void Sprite::Init(p_Texture texture)
     // Create the sprite geometry
     _vertices.insert(_vertices.end(), {
         // Top Right
-        0.5f, 0.5f,
+        1.0f, 1.0f,
         // Bottom Right
-        0.5f, -0.5f,
+        1.0f, -1.0f,
         // Bottom Left
-        -0.5f, -0.5f,
+        -1.0f, -1.0f,
         // Top Left
-        -0.5f, 0.5f
+        -1.0f, 1.0f
         });
 
     // Create uvs
