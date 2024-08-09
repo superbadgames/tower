@@ -17,6 +17,7 @@ Director::~Director(void)
 {
     _shaderManager.reset();
     _textureManager.reset();
+    _instance.reset();
 }
 
 p_Director Director::_instance = nullptr;
@@ -110,10 +111,6 @@ p_TextureManager Director::GetTextureManager(void) const
     return _textureManager;
 }
 
-void Director::RegisterInputWithWindow(p_InputController controller)
-{
-    _window->RegisterInputController(controller);
-}
 
 void Director::BeginUpdate(void)
 {

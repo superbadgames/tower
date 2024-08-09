@@ -3,7 +3,7 @@
 #include "pch.h"
 #include "Tower/framework.h"
 #include "Tower/Input/InputButtons.hpp"
-#include "Tower/Input/InputController.hpp"
+#include "Tower/Input/InputManager.hpp"
 #include "Tower/Components/Camera.hpp"
 #include <glm/vec3.hpp>
 
@@ -36,25 +36,22 @@ namespace Tower
 
         void CloseWindow(void);
 
-        void RegisterInputController(p_InputController controller);
-
         void RegisterCamera(p_Camera camera);
 
         void HideMouseCursor(void) const;
 
         void ShowMouseCursor(void) const;
 
+        void SendInput(ButtonPress press);
+
         inline S32 GetScreenWidth(void) { return _bufferWidth; }
 
         inline S32 GetScreenHeight(void) { return _bufferHeight; }
-
-        inline p_InputController GetInputController(void) { return _inputController; }
 
         inline p_Camera GetCamera(void) { return _camera; }
 
     protected:
         GLFWwindow* _mainWindow;
-        p_InputController _inputController;
         p_Camera _camera;
         S32 _bufferWidth;
         S32 _bufferHeight;

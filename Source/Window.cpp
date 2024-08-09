@@ -3,16 +3,11 @@
 
 using namespace Tower;
 
-Window::Window(void)
-    : _mainWindow(nullptr),
-      _inputController(nullptr),
-      _camera(nullptr),
-      _bufferWidth(800),
-      _bufferHeight(600)
-// _mouseXLastPos(0.0f),
-// _mouseYLastPos(0.0f),
-// _mouseXDelta(0.0f),
-// _mouseYDelta(0.0f)
+Window::Window(void) :
+    _mainWindow(nullptr),
+    _camera(nullptr),
+    _bufferWidth(800),
+    _bufferHeight(600)
 {
 }
 
@@ -22,11 +17,6 @@ Window::~Window(void)
 
 bool Window::Init(string gameName, U32 width, U32 height)
 {
-    // glfwSetWindowUserPointer(_mainWindow, (void*)this);
-    // glfwSetKeyCallback(_mainWindow, &_KeyboardInputHandler);
-    // glfwSetMouseButtonCallback(_mainWindow, &_MouseButtonHandler);
-    // glfwSetCursorPosCallback(_mainWindow, &_MouseCursorHandler);
-
     // Initialize GLFW
     if (!glfwInit())
     {
@@ -70,6 +60,11 @@ bool Window::Init(string gameName, U32 width, U32 height)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    glfwSetWindowUserPointer(_mainWindow, (void*)this);
+    glfwSetKeyCallback(_mainWindow, _KeyboardInputHandler);
+    //glfwSetMouseButtonCallback(_mainWindow, &_MouseButtonHandler);
+    //glfwSetCursorPosCallback(_mainWindow, &_MouseCursorHandler);
+
     return true;
 }
 
@@ -88,7 +83,7 @@ void Window::ProcessEvents(void)
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Window::SetColor(glm::vec3 &color)
+void Window::SetColor(glm::vec3& color)
 {
     glClearColor(color.r, color.g, color.b, 1.0f);
 }
@@ -123,11 +118,6 @@ void Window::CloseWindow(void)
     glfwSetWindowShouldClose(_mainWindow, GL_TRUE);
 }
 
-void Window::RegisterInputController(p_InputController controller)
-{
-    _inputController = controller;
-}
-
 void Window::RegisterCamera(p_Camera camera)
 {
     _camera = camera;
@@ -143,10 +133,16 @@ void Window::ShowMouseCursor(void) const
     glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
-void Window::_KeyboardInputHandler(GLFWwindow *window, int key, int scancode, int action, int mods)
+void Window::SendInput(ButtonPress press)
 {
-    Window *myWindow;
-    myWindow = (Window *)glfwGetWindowUserPointer(window);
+    InputManager::Instance()->UpdateBinding(press);
+}
+
+void Window::_KeyboardInputHandler(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    std::cout << "Keyboard Input Handler was called by glfw and the window class\n";
+    Window* myWindow;
+    myWindow = (Window*)glfwGetWindowUserPointer(window);
 
     assert(myWindow != nullptr || "Error! Window::_KeyboardInputHandler failed to retrieve keyboard pointer");
 
@@ -154,13 +150,14 @@ void Window::_KeyboardInputHandler(GLFWwindow *window, int key, int scancode, in
     press.button = InputButton(key);
     press.state = InputButtonState(action);
 
-    myWindow->GetInputController()->KeyboardButtonPress(press);
+    InputManager::Instance()->UpdateBinding(press);
+    //myWindow->SendInput(press);
 }
 
-void Window::_MouseButtonHandler(GLFWwindow *window, int button, int action, int mods)
+void Window::_MouseButtonHandler(GLFWwindow* window, int button, int action, int mods)
 {
-    Window *myWindow;
-    myWindow = (Window *)glfwGetWindowUserPointer(window);
+    Window* myWindow;
+    myWindow = (Window*)glfwGetWindowUserPointer(window);
 
     assert(myWindow != nullptr || "Error! Window::_KeyboardInputHandler failed to retrieve keyboard pointer");
 
@@ -168,18 +165,18 @@ void Window::_MouseButtonHandler(GLFWwindow *window, int button, int action, int
     press.button = InputButton(button);
     press.state = InputButtonState(action);
 
-    myWindow->GetInputController()->MouseButtonPress(press);
+    InputManager::Instance()->UpdateBinding(press);
 }
 
-void Window::_MouseCursorHandler(GLFWwindow *window, double xPos, double yPos)
+void Window::_MouseCursorHandler(GLFWwindow* window, double xPos, double yPos)
 {
     std::cout << "the mouse handler was called, input = (" << xPos << "," << yPos << ")" << std::endl;
-    Window *myWindow;
-    myWindow = (Window *)glfwGetWindowUserPointer(window);
+    Window* myWindow;
+    myWindow = (Window*)glfwGetWindowUserPointer(window);
 
     assert(myWindow != nullptr || "Error! Window::_KeyboardInputHandler failed to retrieve keyboard pointer");
 
     // camera->SetMouseCursorPosition(glm::vec2(static_cast<F32>(xPos), static_cast<F32>(yPos)));
-    myWindow->GetInputController()->SetMouseCursorPosition(glm::vec2((F32)xPos, (F32)yPos));
+    InputManager::Instance()->SetMouseCursorPosition(glm::vec2((F32)xPos, (F32)yPos));
     //  myWindow->GetCamera()->UpdateYawAndPitch((F32)xPos, (F32)yPos);
 }

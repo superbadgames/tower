@@ -8,7 +8,6 @@
 #include "Tower/Managers/ShaderManager.hpp"
 #include "Tower/Managers/TextureManager.hpp"
 #include "Tower/Rendering/Shader.hpp"
-#include "Tower/Input/InputController.hpp"
 
 namespace Tower
 {
@@ -55,8 +54,6 @@ namespace Tower
         p_ShaderManager GetShaderManager(void) const;
 
         p_TextureManager GetTextureManager(void) const;
-
-        void RegisterInputWithWindow(p_InputController controller);
 
         void BeginUpdate(void);
 
