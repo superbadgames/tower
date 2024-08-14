@@ -251,7 +251,6 @@ const string Shader::_GetShaderSourceFromFile(const string& path)
 
 void Shader::_PopulateUniforms(void)
 {
-    std::cout << "Populating shader uniforms...\n";
     S32 numberOfUniforms = -1;
     S32 length = 0;
     S32 size = 0;
@@ -260,9 +259,6 @@ void Shader::_PopulateUniforms(void)
 
     Use();
     glGetProgramiv(_shaderHandle, GL_ACTIVE_UNIFORMS, &numberOfUniforms);
-
-    std::cout << "Shader handle = " << _shaderHandle << std::endl
-        << "Number of uniforms found = " << numberOfUniforms << std::endl;
 
     for (S32 i = 0; i < numberOfUniforms; i++)
     {
@@ -281,7 +277,6 @@ void Shader::_PopulateUniforms(void)
             // array []
             // block
             _uniforms[name] = uniformLocation;
-            std::cout << "Added a uniform. Name = " << name << " , location = " << uniformLocation << std::endl;
         }
     }
     StopUse();
@@ -316,7 +311,6 @@ void Shader::_CheckForUniform(string name)
         if (location >= 0)
         {
             _uniforms[name] = location;
-            std::cout << "Added a uniform. Name = " << name << " , location = " << location << std::endl;
         }
         else
         {

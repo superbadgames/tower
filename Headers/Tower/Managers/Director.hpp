@@ -33,9 +33,9 @@ namespace Tower
 
         void Cleanup(void);
 
-        void Tick(void);
+        void StartFrame(void);
 
-        void Tock(void);
+        void EndFrame(void);
 
         void ProcessEvents(void);
 
@@ -54,10 +54,6 @@ namespace Tower
         p_ShaderManager GetShaderManager(void) const;
 
         p_TextureManager GetTextureManager(void) const;
-
-        void BeginUpdate(void);
-
-        void EndUpdate(void);
 
     private:
         static shared_ptr<Director> _instance;

@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Tower/Managers/Director.hpp"
 
-#include <iostream>
-
 using namespace Tower;
 
 Director::Director(void) :
@@ -51,13 +49,15 @@ void Director::Cleanup(void)
 }
 
 
-void Director::Tick(void)
+void Director::StartFrame(void)
 {
     _time.Tick();
+    InputManager::Instance()->ResetBindings();
+    ProcessEvents();
 }
 
 
-void Director::Tock(void)
+void Director::EndFrame(void)
 {
     _time.Tock();
 }
@@ -109,16 +109,4 @@ p_ShaderManager Director::GetShaderManager(void) const
 p_TextureManager Director::GetTextureManager(void) const
 {
     return _textureManager;
-}
-
-
-void Director::BeginUpdate(void)
-{
-    Tick();
-    ProcessEvents();
-}
-
-void Director::EndUpdate(void)
-{
-    Tock();
 }

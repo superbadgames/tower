@@ -133,14 +133,8 @@ void Window::ShowMouseCursor(void) const
     glfwSetInputMode(_mainWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
-void Window::SendInput(ButtonPress press)
-{
-    InputManager::Instance()->UpdateBinding(press);
-}
-
 void Window::_KeyboardInputHandler(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    std::cout << "Keyboard Input Handler was called by glfw and the window class\n";
     Window* myWindow;
     myWindow = (Window*)glfwGetWindowUserPointer(window);
 
@@ -148,10 +142,21 @@ void Window::_KeyboardInputHandler(GLFWwindow* window, int key, int scancode, in
 
     ButtonPress press;
     press.button = InputButton(key);
-    press.state = InputButtonState(action);
+
+    if (action == GLFW_PRESS)
+    {
+        press.state = InputButtonState::PRESS;
+    }
+    else if (action == GLFW_REPEAT)
+    {
+        press.state = InputButtonState::HOLD;
+    }
+    else if (action == GLFW_RELEASE)
+    {
+        press.state = InputButtonState::RELEASE;
+    }
 
     InputManager::Instance()->UpdateBinding(press);
-    //myWindow->SendInput(press);
 }
 
 void Window::_MouseButtonHandler(GLFWwindow* window, int button, int action, int mods)

@@ -2,17 +2,11 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
+#include "Tower/Input/InputButtonState.hpp"
 #include <GLFW/glfw3.h>
 
 namespace Tower
 {
-    enum class InputButtonState
-    {
-        PRESS = GLFW_PRESS,
-        RELEASE = GLFW_RELEASE,
-        HOLD = GLFW_REPEAT
-    };
-
     static const U32 NUM_KEYS = 256;
     enum class InputButton
     {

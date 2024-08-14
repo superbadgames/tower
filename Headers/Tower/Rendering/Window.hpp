@@ -42,8 +42,6 @@ namespace Tower
 
         void ShowMouseCursor(void) const;
 
-        void SendInput(ButtonPress press);
-
         inline S32 GetScreenWidth(void) { return _bufferWidth; }
 
         inline S32 GetScreenHeight(void) { return _bufferHeight; }

@@ -6,8 +6,8 @@
 using namespace Tower;
 
 InputManager::InputManager(void) :
-    _allBindings(),
-    _activeBindings()
+    _registeredBindings(),
+    _bindingStates()
 {
 
 }
@@ -22,45 +22,83 @@ shared_ptr<InputManager> InputManager::Instance(void)
 {
     if (_instance == nullptr)
     {
-        std::cout << "No instance found, creating one now...\n";
         _instance = p_InputManager(new InputManager());
     }
     return _instance;
 }
 
-void InputManager::ResetActiveBindings(void)
-{
-    _activeBindings.clear();
-}
 
 void InputManager::UpdateBinding(ButtonPress update)
 {
-    std::cout << "InputManager::UpdateBinding was called\n";
-    for (const auto& key : _allBindings)
+    for (const auto& key : _registeredBindings)
     {
         // Any Action bound to the key pressed will be updated
-        if (key.second.button == update.button && key.second.state == update.state)
+        if (key.second == update.button)
         {
-            _activeBindings[key.first] = true;
+            _bindingStates[key.first] = update.state;
         }
     }
 }
 
-bool InputManager::IsBindingActive(string name)
+void InputManager::ResetBindings(void)
 {
-    // TODO:: Test what happens if I ask for a binding that doesn't exist
-    return _activeBindings[name];
+    for (const auto& binding : _bindingStates)
+    {
+        if (_bindingStates[binding.first] != InputButtonState::PRESS && _bindingStates[binding.first] != InputButtonState::HOLD)
+        {
+            _bindingStates[binding.first] = InputButtonState::NONE;
+        }
+    }
 }
 
-void InputManager::AddBinding(const InputBinding& binding)
+
+bool InputManager::IsBindingPressed(const string& name)
 {
-    if (_allBindings.find(binding.name) != _allBindings.end())
+    if (_bindingStates[name] == InputButtonState::PRESS)
     {
-        string message = "Error! KeyboardInput::AddBinding was called twice for " + binding.name;
+        return true;
+    }
+    return false;
+}
+
+bool InputManager::IsBindingHeld(const string& name)
+{
+    if (_bindingStates[name] == InputButtonState::HOLD)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool InputManager::IsBindingReleased(const string& name)
+{
+    if (_bindingStates[name] == InputButtonState::RELEASE)
+    {
+        return true;
+    }
+    return false;
+}
+
+bool InputManager::IsBindingPressedOrHeld(const string& name)
+{
+    if (_bindingStates[name] == InputButtonState::PRESS || _bindingStates[name] == InputButtonState::HOLD)
+    {
+        return true;
+    }
+    return false;
+}
+
+
+void InputManager::AddBinding(const string& name, InputButton button)
+{
+    if (_registeredBindings.find(name) != _registeredBindings.end())
+    {
+        string message = "Error! KeyboardInput::AddBinding was called twice for " + name;
         assert(message.c_str());
     }
-    std::cout << "Add Binding called for " << binding.name << std::endl;
-    _allBindings[binding.name] = _BindingInfo(binding.button, binding.state);
+
+    _registeredBindings[name] = button;
+    _bindingStates[name] = InputButtonState::NONE;
 }
 
 void InputManager::SetMouseCursorPosition(const glm::vec2& position)
@@ -81,8 +119,8 @@ const glm::vec2& InputManager::GetMousePreviousCursorPosition(void) const
 
 void InputManager::AddWASDMovement(const string& forward, const string& back, const string& right, const string& left)
 {
-    AddBinding(InputBinding(forward, Tower::InputButton::W, Tower::InputButtonState::HOLD));
-    AddBinding(InputBinding(back, Tower::InputButton::S, Tower::InputButtonState::HOLD));
-    AddBinding(InputBinding(right, Tower::InputButton::D, Tower::InputButtonState::HOLD));
-    AddBinding(InputBinding(left, Tower::InputButton::A, Tower::InputButtonState::HOLD));
+    AddBinding(forward, Tower::InputButton::W);
+    AddBinding(back, Tower::InputButton::S);
+    AddBinding(right, Tower::InputButton::D);
+    AddBinding(left, Tower::InputButton::A);
 }
