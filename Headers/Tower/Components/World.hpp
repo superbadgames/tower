@@ -3,7 +3,7 @@
 #include "pch.h"
 #include "Tower/framework.h"
 #include "Tower/Managers/Director.hpp"
-#include "Tower/Components/Camera.hpp"
+#include <glm/mat4x4.hpp>
 
 namespace Tower
 {
@@ -18,11 +18,10 @@ namespace Tower
 
         virtual void v_Update(void) = 0;
 
-        virtual void v_Render(void) = 0;
+        virtual void v_Render(const glm::mat4& viewMatrix) = 0;
 
     protected:
         p_Director _director;
-        p_Camera _camera;
     };
     typedef shared_ptr<World> p_World;
 }

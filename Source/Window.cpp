@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "Tower/Rendering/Window.hpp"
 
+#include <iostream>
+
 using namespace Tower;
 
 Window::Window(void) :
     _mainWindow(nullptr),
-    _camera(nullptr),
     _bufferWidth(800),
     _bufferHeight(600)
 {
@@ -116,11 +117,6 @@ bool Window::ShouldWindowClose(void)
 void Window::CloseWindow(void)
 {
     glfwSetWindowShouldClose(_mainWindow, GL_TRUE);
-}
-
-void Window::RegisterCamera(p_Camera camera)
-{
-    _camera = camera;
 }
 
 void Window::HideMouseCursor(void) const

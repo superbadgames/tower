@@ -4,15 +4,10 @@
 #include "Tower/framework.h"
 #include "Tower/Input/InputButtons.hpp"
 #include "Tower/Input/InputManager.hpp"
-#include "Tower/Components/Camera.hpp"
 #include <glm/vec3.hpp>
 
 namespace Tower
 {
-    // Forward declaration needed because the call back functions, the handlers cause some circular refs, I think.
-    class Camera;
-    typedef shared_ptr<Camera> p_Camera;
-
     class Window
     {
     public:
@@ -36,8 +31,6 @@ namespace Tower
 
         void CloseWindow(void);
 
-        void RegisterCamera(p_Camera camera);
-
         void HideMouseCursor(void) const;
 
         void ShowMouseCursor(void) const;
@@ -46,11 +39,9 @@ namespace Tower
 
         inline S32 GetScreenHeight(void) { return _bufferHeight; }
 
-        inline p_Camera GetCamera(void) { return _camera; }
 
     protected:
         GLFWwindow* _mainWindow;
-        p_Camera _camera;
         S32 _bufferWidth;
         S32 _bufferHeight;
 

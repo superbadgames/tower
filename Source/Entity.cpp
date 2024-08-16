@@ -24,7 +24,8 @@ void Entity::Draw(const glm::mat4& viewMatrix) const
 
     if (_sprite != nullptr)
     {
-        _shader->SetUniform("transform", _transform.ToMatrix());
+        _shader->SetUniform("model", _transform.ToMatrix());
+        _shader->SetUniform("view", viewMatrix);
         _sprite->Draw(_shader, _color);
     }
 
