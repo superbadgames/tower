@@ -41,6 +41,11 @@ namespace Tower
             const string& right = "move_right",
             const string& left = "move_left");
 
+        void AddArrowMovement(const string& forward = "move_forward",
+            const string& back = "move_back",
+            const string& right = "move_right",
+            const string& left = "move_left");
+
     private:
         static shared_ptr<InputManager> _instance;
         // TODO: Learn how to hash this string

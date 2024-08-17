@@ -124,3 +124,11 @@ void InputManager::AddWASDMovement(const string& forward, const string& back, co
     AddBinding(right, Tower::InputButton::D);
     AddBinding(left, Tower::InputButton::A);
 }
+
+void InputManager::AddArrowMovement(const string& forward, const string& back, const string& right, const string& left)
+{
+    AddBinding(forward, Tower::InputButton::UP_ARROW);
+    AddBinding(back, Tower::InputButton::DOWN_ARROW);
+    AddBinding(right, Tower::InputButton::RIGHT_ARROW);
+    AddBinding(left, Tower::InputButton::LEFT_ARROW);
+}

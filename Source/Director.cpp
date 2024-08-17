@@ -7,7 +7,8 @@ Director::Director(void) :
     _window(nullptr),
     _time{},
     _shaderManager(nullptr),
-    _textureManager(nullptr)
+    _textureManager(nullptr),
+    _camera2D(nullptr)
 {
 }
 
@@ -38,6 +39,9 @@ bool Director::Init(WindowType type, string name, const U32 width, const U32 hei
 
     _shaderManager = std::make_shared<ShaderManager>();
     _textureManager = std::make_shared<TextureManager>();
+
+    _camera2D = std::make_shared<Camera2D>();
+    _camera2D->Init((F32)width, (F32)height);
 
     return true;
 }
@@ -109,4 +113,9 @@ p_ShaderManager Director::GetShaderManager(void) const
 p_TextureManager Director::GetTextureManager(void) const
 {
     return _textureManager;
+}
+
+p_Camera2D Director::GetCamera2D(void) const
+{
+    return _camera2D;
 }

@@ -8,6 +8,7 @@
 #include "Tower/Managers/ShaderManager.hpp"
 #include "Tower/Managers/TextureManager.hpp"
 #include "Tower/Rendering/Shader.hpp"
+#include "Tower/Cameras/Camera2D.hpp"
 
 namespace Tower
 {
@@ -55,6 +56,8 @@ namespace Tower
 
         p_TextureManager GetTextureManager(void) const;
 
+        p_Camera2D GetCamera2D(void) const;
+
     private:
         static shared_ptr<Director> _instance;
 
@@ -62,6 +65,7 @@ namespace Tower
         TimeSystem _time;
         p_ShaderManager _shaderManager;
         p_TextureManager _textureManager;
+        p_Camera2D _camera2D;
 
         Director(void);
 
