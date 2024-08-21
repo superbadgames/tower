@@ -5,7 +5,7 @@ using namespace Tower;
 
 Director::Director(void) :
     _window(nullptr),
-    _time{},
+    _globalTime(),
     _shaderManager(nullptr),
     _textureManager(nullptr),
     _camera2D(nullptr)
@@ -55,7 +55,7 @@ void Director::Cleanup(void)
 
 void Director::StartFrame(void)
 {
-    _time.Tick();
+    _globalTime.Tick();
     InputManager::Instance()->ResetBindings();
     ProcessEvents();
 }
@@ -63,7 +63,7 @@ void Director::StartFrame(void)
 
 void Director::EndFrame(void)
 {
-    _time.Tock();
+    _globalTime.Tock();
 }
 
 
@@ -92,12 +92,12 @@ void Director::SetWindowBackgroundColor(glm::vec3& color)
 
 F32 Director::GetDeltaTime(void) const
 {
-    return _time.GetDeltaClock().Time;
+    return _globalTime.GetDeltaTime();
 }
 
 F32 Director::GetElapsedTime(void) const
 {
-    return _time.GetElapsedClock().Time;
+    return _globalTime.GetElapsedTime();
 }
 
 p_Window Director::GetWindowPointer(void) const

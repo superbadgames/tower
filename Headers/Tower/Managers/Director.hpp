@@ -2,7 +2,7 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
-#include "Tower/Systems/TimeSystem.hpp"
+#include "Tower/Systems/Time.hpp"
 #include "Tower/Rendering/Window.hpp"
 // OpenGLWindow must be included before ShaderManager!
 #include "Tower/Managers/ShaderManager.hpp"
@@ -62,7 +62,7 @@ namespace Tower
         static shared_ptr<Director> _instance;
 
         p_Window _window;
-        TimeSystem _time;
+        Time _globalTime;
         p_ShaderManager _shaderManager;
         p_TextureManager _textureManager;
         p_Camera2D _camera2D;
