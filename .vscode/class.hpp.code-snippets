@@ -1,0 +1,22 @@
+{
+  "Tower Header file": {
+    "scope": "cpp",
+    "isFileTemplate": true,
+    "prefix": "\\newTowerHeader",
+    "body": [
+      "#pragma once\n",
+      "#include \"pch.h\"",
+      "#include \"Tower/framework.h\"\n",
+      "namespace Tower",
+      "{",
+      "\tclass ${TM_FILENAME_BASE}",
+      "\t{",
+      "\tpublic:",
+      "\t\t${TM_FILENAME_BASE}(void);\n",
+      "\t\t~${TM_FILENAME_BASE}(void);\n",
+      "\tprivate:",
+      "\t};",
+      "}"
+    ]
+  }
+}

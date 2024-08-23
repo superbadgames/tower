@@ -1,0 +1,12 @@
+{
+  "Tower Source File": {
+    "scope": "cpp",
+    "isFileTemplate": true,
+    "prefix": "\\newTowerSource",
+    "body": [
+      "#include \"pch.h\"",
+      "#include \"Path To Header here\"\n",
+      "using namespace Tower;"
+    ]
+  }
+}

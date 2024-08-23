@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
+#include "Tower/UI/CharacterData.hpp"
 #include <glm/vec2.hpp>
 #include <ft2build.h>
 #include FT_FREETYPE_H
@@ -9,13 +10,7 @@
 
 namespace Tower
 {
-    struct Character
-    {
-        U32 TextureId;
-        glm::ivec2 Size;
-        glm::ivec2 Bearing;
-        U32 Advance;
-    };
+
 
     class Font
     {
@@ -28,7 +23,7 @@ namespace Tower
         void Load(const string& filepath, U32 height, U32 width = 0);
 
     private:
-        std::map<char, Character> _characters;
+        std::map<char, CharacterData> _characters;
     };
     typedef shared_ptr<Font> p_Font;
 }

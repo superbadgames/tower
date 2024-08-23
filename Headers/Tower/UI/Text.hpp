@@ -2,7 +2,7 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
-#include <>
+
 
 namespace Tower
 {
@@ -13,8 +13,7 @@ namespace Tower
 
         ~Text(void);
     private:
-        GLuint _vao;    // Vertex Array Object
-        GLuint _vbo;    // Vertex Buffer Object
+
 
     };
 }
