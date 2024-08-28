@@ -47,17 +47,20 @@ void Font::Load(const string& filepath, U32 height, U32 width)
             continue;
         }
 
-        U32 texture;
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
+        U32 textureID;
+        glGenTextures(1, &textureID);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+
+        U32 width = face->glyph->bitmap.width;
+        U32 height = face->glyph->bitmap.rows;
 
         // GL_RED because we want a gray scale texture. This only pulls the r value.
         glTexImage2D(
             GL_TEXTURE_2D,
             0,
             GL_RED,
-            face->glyph->bitmap.width,
-            face->glyph->bitmap.rows,
+            width,
+            height,
             0,
             GL_RED,
             GL_UNSIGNED_BYTE,
@@ -70,9 +73,12 @@ void Font::Load(const string& filepath, U32 height, U32 width)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+        p_Texture texture = std::make_shared<Texture>(textureID, width, height);
+
         CharacterData character = {
             texture,
-            glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+            glm::ivec2(width, height),
+            // bearing data
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
             static_cast<U32>(face->glyph->advance.x)
         };
@@ -82,4 +88,11 @@ void Font::Load(const string& filepath, U32 height, U32 width)
     // clean up
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
+}
+
+const CharacterData& Font::GetCharacterData(char character)
+{
+    assert(_characters.find(character) != _characters.end() && "Font::GetCharacterData Character not found! Maybe more characters need to be loaded?\n");
+
+    return _characters[character];
 }

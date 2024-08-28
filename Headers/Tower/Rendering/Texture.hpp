@@ -11,6 +11,10 @@ namespace Tower
     public:
         Texture(void);
 
+        Texture(const Texture& texture);
+
+        Texture(U32 textureId, S32 width, S32 height);
+
         ~Texture(void);
 
         void Load(string filepath, bool generateMipMaps = true);
@@ -19,12 +23,16 @@ namespace Tower
 
         void Unbind(void);
 
+        inline GLuint GetTextureID(void) const { return _textureID; }
+
+        inline S32 GetWidth(void) const { return _width; }
+
+        inline S32 GetHeight(void) const { return _height; }
+
     private:
         GLuint _textureID;
-        string _type;
         S32 _width;
         S32 _height;
-        S32 _colorChannels;
     };
     typedef shared_ptr<Texture> p_Texture;
 }

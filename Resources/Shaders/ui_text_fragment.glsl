@@ -1,13 +1,14 @@
-#version 330
-in vec2 text_uvs;
+#version 330 core
 
-out vec4 color;
+out vec4 outputColor;
 
-uniform sampler2D glyph;
-uniform vec3 text_color;
+in vec2 texture_uvs;
+
+
+uniform vec4 sprite_color;
+uniform sampler2D spriteTexture;
 
 void main()
 {
-    vec4 sampledColors = vec4(1.0, 1.0, 1.0, texture(glyph, text_uvs).r);
-    color = vec4(text_color, 1.0) * sampledColors;
+  outputColor = texture(spriteTexture, texture_uvs) + sprite_color;
 }

@@ -10,12 +10,26 @@ using namespace Tower;
 
 Texture::Texture(void) :
     _textureID(0),
-    _type(),
     _width(0),
-    _height(0),
-    _colorChannels(0)
+    _height(0)
 {
     glGenTextures(1, &_textureID);
+}
+
+Texture::Texture(const Texture& texture) :
+    _textureID(texture.GetTextureID()),
+    _width(texture.GetWidth()),
+    _height(texture.GetHeight())
+{
+
+}
+
+Texture::Texture(U32 textureId, S32 width, S32 height) :
+    _textureID(textureId),
+    _width(width),
+    _height(height)
+{
+
 }
 
 Texture::~Texture(void)
@@ -26,7 +40,9 @@ Texture::~Texture(void)
 
 void Texture::Load(string filepath, bool generateMipMaps)
 {
-    unsigned char* imageData = stbi_load(filepath.c_str(), &_width, &_height, &_colorChannels, 0);
+    // No need to save this, but it's required for the fuction call
+    S32 colorChannels;
+    unsigned char* imageData = stbi_load(filepath.c_str(), &_width, &_height, &colorChannels, 0);
 
     if (!imageData)
     {

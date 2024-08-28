@@ -27,6 +27,8 @@ namespace Tower
 
         inline const glm::mat4& GetViewMatrix(void) const { return _view; }
 
+        inline const glm::mat4& GetProjectionMatrix(void) const { return _projection; }
+
 
     private:
         glm::mat4 _view;

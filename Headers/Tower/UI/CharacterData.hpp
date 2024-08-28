@@ -2,15 +2,16 @@
 
 #include "pch.h"
 #include "Tower/framework.h"
+#include "Tower/Rendering/Texture.hpp"
 #include <glm/vec2.hpp>
 
 namespace Tower
 {
     struct CharacterData
     {
-        U32 TextureId;
-        glm::ivec2 Size;
-        glm::ivec2 Bearing;
-        U32 Advance;
+        p_Texture texture;
+        glm::ivec2 size;
+        glm::ivec2 bearing;
+        U32 advance;
     };
 }
