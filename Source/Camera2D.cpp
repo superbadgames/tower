@@ -3,16 +3,14 @@
 
 using namespace Tower;
 
-Camera2D::Camera2D(void) :
-    _view(1.0f),
-    _projection(1.0f),
-    _position(glm::vec3(0.0f, 0.0f, 0.0f))
+Camera2D::Camera2D(void) : _view(1.0f),
+                           _projection(1.0f),
+                           _position(glm::vec3(0.0f, 0.0f, 0.0f))
 {
 }
 
 Camera2D::~Camera2D(void)
 {
-
 }
 
 void Camera2D::Init(F32 screenWidth, F32 screenHeight)
@@ -24,19 +22,18 @@ void Camera2D::Init(F32 screenWidth, F32 screenHeight)
     CalculateViewMatrix();
 }
 
-
-void Camera2D::SetPosition(const glm::vec2& position)
+void Camera2D::SetPosition(const glm::vec2 &position)
 {
-    _position = glm::vec3(position, _position.z);
+    // The position is negated so that input is reverse. This moves objects around the camera
+    _position = glm::vec3(-position, _position.z);
     CalculateViewMatrix();
 }
 
-void Camera2D::Move(const glm::vec2& velocity)
+void Camera2D::Move(const glm::vec2 &velocity)
 {
     _position += glm::vec3(velocity, 0.0f);
     CalculateViewMatrix();
 }
-
 
 void Camera2D::CalculateViewMatrix(void)
 {
