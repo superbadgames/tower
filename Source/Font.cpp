@@ -4,18 +4,15 @@
 
 using namespace Tower;
 
-Font::Font(void) :
-    _characters()
+Font::Font(void) : _characters()
 {
-
 }
 
 Font::~Font(void)
 {
-
 }
 
-void Font::Load(const string& filepath, U32 height, U32 width)
+void Font::Load(const string &filepath, U32 height, U32 width)
 {
     // Freetype will return non zero values on failure
     FT_Library ft;
@@ -64,8 +61,7 @@ void Font::Load(const string& filepath, U32 height, U32 width)
             0,
             GL_RED,
             GL_UNSIGNED_BYTE,
-            face->glyph->bitmap.buffer
-        );
+            face->glyph->bitmap.buffer);
 
         // Set texture options
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -80,17 +76,18 @@ void Font::Load(const string& filepath, U32 height, U32 width)
             glm::ivec2(width, height),
             // bearing data
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-            static_cast<U32>(face->glyph->advance.x)
-        };
-        _characters.insert({ c, character });
+            static_cast<U32>(face->glyph->advance.x)};
+        _characters.insert({c, character});
     }
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     // clean up
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 }
 
-const CharacterData& Font::GetCharacterData(char character)
+const CharacterData &Font::GetCharacterData(char character)
 {
     assert(_characters.find(character) != _characters.end() && "Font::GetCharacterData Character not found! Maybe more characters need to be loaded?\n");
 
