@@ -10,9 +10,10 @@ namespace Tower
     class TextureManager
     {
     public:
-        TextureManager(void);
 
         ~TextureManager(void);
+
+        static shared_ptr<TextureManager> Instance(void);
 
         void LoadTexture(U32 textureID, const string& filepath);
 
@@ -21,7 +22,10 @@ namespace Tower
         p_Texture GetTexture(U32 textureID);
 
     private:
+        static shared_ptr<TextureManager> _instance;
         std::unordered_map<U32, p_Texture> _textures;
+
+        TextureManager(void);
     };
     typedef shared_ptr<TextureManager> p_TextureManager;
 }

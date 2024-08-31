@@ -4,7 +4,7 @@
 #include "Tower/framework.h"
 #include "Tower/Rendering/Sprite.hpp"
 #include "Tower/UI/CharacterData.hpp"
-#include "Tower/Components/Transform.hpp"
+#include "Tower/Math/Transform.hpp"
 
 namespace Tower
 {
@@ -22,6 +22,8 @@ namespace Tower
         void SetPosition(const glm::vec3& pos);
 
         const glm::vec3& GetPosition(void) const;
+
+        void SetScale(const glm::vec2& scale);
 
         inline void SetCharacterData(const CharacterData& data) { _characterData = data; }
 

@@ -6,16 +6,12 @@ using namespace Tower;
 Director::Director(void) :
     _window(nullptr),
     _globalTime(),
-    _shaderManager(nullptr),
-    _textureManager(nullptr),
     _camera2D(nullptr)
 {
 }
 
 Director::~Director(void)
 {
-    _shaderManager.reset();
-    _textureManager.reset();
     _instance.reset();
 }
 
@@ -36,9 +32,6 @@ bool Director::Init(WindowType type, string name, const U32 width, const U32 hei
         _window = std::make_shared<Window>();
         _window->Init(name, width, height);
     }
-
-    _shaderManager = std::make_shared<ShaderManager>();
-    _textureManager = std::make_shared<TextureManager>();
 
     _camera2D = std::make_shared<Camera2D>();
     _camera2D->Init((F32)width, (F32)height);
@@ -103,16 +96,6 @@ F32 Director::GetElapsedTime(void) const
 p_Window Director::GetWindowPointer(void) const
 {
     return _window;
-}
-
-p_ShaderManager Director::GetShaderManager(void) const
-{
-    return _shaderManager;
-}
-
-p_TextureManager Director::GetTextureManager(void) const
-{
-    return _textureManager;
 }
 
 p_Camera2D Director::GetCamera2D(void) const

@@ -4,7 +4,7 @@
 #include "Tower/framework.h"
 #include "Tower/Systems/System.hpp"
 #include "Tower/Rendering/Model.hpp"
-#include "Tower/Components/Transform.hpp"
+#include "Tower/Math/Transform.hpp"
 #include "Tower/Components/Camera.hpp"
 #include "Tower/Rendering/Light.hpp"
 #include <glm/mat4x4.hpp>
@@ -12,7 +12,7 @@
 
 namespace Tower
 {
-    class RenderSystem: public System
+    class RenderSystem : public System
     {
     public:
         RenderSystem(void);

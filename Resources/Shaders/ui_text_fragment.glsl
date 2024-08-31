@@ -10,5 +10,5 @@ uniform sampler2D spriteTexture;
 
 void main()
 {
-  outputColor = texture(spriteTexture, texture_uvs) + sprite_color;
+  outputColor = texture(spriteTexture, texture_uvs) + (sprite_color * 0.0);
 }

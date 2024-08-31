@@ -15,6 +15,17 @@ ShaderManager::~ShaderManager(void)
     _shaders.clear();
 }
 
+p_ShaderManager ShaderManager::_instance = nullptr;
+
+p_ShaderManager ShaderManager::Instance(void)
+{
+    if (_instance == nullptr)
+    {
+        _instance = p_ShaderManager(new ShaderManager());
+    }
+    return _instance;
+}
+
 void ShaderManager::LoadShader(U32 shaderID, const string& vertexFilepath, const string& fragmentFilepath)
 {
     if (_shaders.find(shaderID) != _shaders.end())

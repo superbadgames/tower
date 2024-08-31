@@ -7,6 +7,7 @@ Text::Text(void) :
     _shader(nullptr),
     _font(nullptr),
     _message(),
+    _transform(),
     _glyphs()
 {
 
@@ -40,4 +41,45 @@ void Text::Draw(const glm::mat4& projectionMatrix)
     _shader->Use();
 
     _shader->SetUniform("projection", projectionMatrix);
+}
+
+void Text::SetMessage(const string& message)
+{
+
+}
+
+void Text::SetMessage(const string& message, const glm::vec3& pos)
+{
+    SetPosition(pos);
+    SetMessage(message);
+}
+
+void Text::SetPosition(const glm::vec3& pos)
+{
+    _transform.SetPosition(pos);
+    _UpdateGlyphPositions();
+}
+
+void Text::SetScale(const glm::vec3& scale)
+{
+    _transform.SetScale(scale);
+    _UpdateGlyphPositions();
+}
+
+void Text::_GenerateGlyphs(void)
+{
+    glm::vec3 currentPos = _transform.GetPosition();
+    glm::vec3 scale = _transform.GetScale();
+    for (char c : _message)
+    {
+        const CharacterData& characterData = _font->GetCharacterData(c);
+
+        F32 xPosition = currentPos.x + characterData.bearing.x * scale.x;
+        F32 yPosition = currentPos.y - (characterData.size.y - characterData.bearing.y) * scale.y;
+    }
+}
+
+void Text::_UpdateGlyphPositions(void)
+{
+
 }

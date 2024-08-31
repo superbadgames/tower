@@ -37,7 +37,13 @@ void Glyph::SetPosition(const glm::vec3& pos)
     _transform.SetPosition(pos);
 }
 
+
 const glm::vec3& Glyph::GetPosition(void) const
 {
     return _transform.GetPosition();
+}
+
+void Glyph::SetScale(const glm::vec2& scale)
+{
+    _transform.SetScale(glm::vec3(scale.x, scale.y, 0.0f));
 }

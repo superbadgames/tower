@@ -4,9 +4,6 @@
 #include "Tower/framework.h"
 #include "Tower/Systems/Time.hpp"
 #include "Tower/Rendering/Window.hpp"
-// OpenGLWindow must be included before ShaderManager!
-#include "Tower/Managers/ShaderManager.hpp"
-#include "Tower/Managers/TextureManager.hpp"
 #include "Tower/Rendering/Shader.hpp"
 #include "Tower/Cameras/Camera2D.hpp"
 
@@ -52,10 +49,6 @@ namespace Tower
 
         p_Window GetWindowPointer(void) const;
 
-        p_ShaderManager GetShaderManager(void) const;
-
-        p_TextureManager GetTextureManager(void) const;
-
         p_Camera2D GetCamera2D(void) const;
 
     private:
@@ -63,8 +56,6 @@ namespace Tower
 
         p_Window _window;
         Time _globalTime;
-        p_ShaderManager _shaderManager;
-        p_TextureManager _textureManager;
         p_Camera2D _camera2D;
 
         Director(void);

@@ -3,7 +3,7 @@
 
 using namespace Tower;
 
-TextureManager::TextureManager(void):
+TextureManager::TextureManager(void) :
     _textures()
 {
 
@@ -12,6 +12,17 @@ TextureManager::TextureManager(void):
 TextureManager::~TextureManager(void)
 {
     _textures.clear();
+}
+
+p_TextureManager TextureManager::_instance = nullptr;
+
+p_TextureManager TextureManager::Instance(void)
+{
+    if (_instance == nullptr)
+    {
+        _instance = p_TextureManager(new TextureManager());
+    }
+    return _instance;
 }
 
 void TextureManager::LoadTexture(U32 textureID, const string& filepath)
